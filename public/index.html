@@ -3,186 +3,180 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ApnaBot — Apna Business ka Digital Saathi</title>
-  <meta name="description" content="ApnaBot automates WhatsApp replies, orders, reminders, and reviews for Indian small businesses. WhatsApp-first. Hindi • Hinglish • English." />
-  <meta name="theme-color" content="#10b981" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>ApnaBot — SMB Automation Chatbots</title>
+  <meta name="description" content="ApnaBot helps Indian SMBs automate sales, support, and lead capture with Hinglish-friendly chatbots on web and beyond." />
   <style>
     :root{
-      --ink:#0f172a; --muted:#64748b; --brand:#10b981; --brand-600:#059669; --brand-700:#047857;
-      --brand-100:#d1fae5; --ring:#e5e7eb; --card:#ffffff; --bg:#f8fafc; --accent:#06b6d4; --warning:#f59e0b;
-      --shadow:0 10px 30px rgba(2,6,23,.08);
+      --brand:#2563eb; --brand-600:#2563eb; --bg:#0b1020; --card:#0e1630; --ring:#2b3a66;
+      --text:#e6eaf5; --muted:#8a93a8; --accent:#16a34a; --danger:#f43f5e;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
-    a{color:var(--brand);text-decoration:none}
-    a:hover{color:var(--brand-600)}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:#fff;padding:.9rem 1.2rem;border-radius:14px;font-weight:700;box-shadow:0 8px 24px rgba(16,185,129,.28);transform:translateZ(0);transition:.25s}
-    .btn:hover{background:var(--brand-600);transform:translateY(-1px)}
-    .btn-outline{background:#fff;border:1px solid var(--ring);color:var(--ink);box-shadow:var(--shadow)}
-    .btn-outline:hover{background:#f9fafb}
-    header{position:sticky;top:0;background:#ffffffcc;backdrop-filter:blur(10px);border-bottom:1px solid var(--ring);z-index:50}
-    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    nav .brand{display:flex;align-items:center;gap:.6rem;font-weight:800}
-    .logo{width:30px;height:30px;filter:drop-shadow(0 4px 10px rgba(16,185,129,.4))}
-    .nav-links{display:none;gap:1.25rem;font-weight:600}
-    @media (min-width: 820px){.nav-links{display:flex}}
+    html,body{margin:0;height:100%}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0a1022,#0b1228 40%,#0c142c);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .btn{background:var(--brand);color:#fff;border:none;border-radius:12px;padding:10px 16px;font-weight:700;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 20px rgba(37,99,235,.25)}
+    .btn.alt{background:#0b1228;border:1px solid var(--ring)}
+    header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(11,18,40,.6);border-bottom:1px solid rgba(255,255,255,.06);z-index:10}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    nav .left{display:flex;gap:18px;align-items:center}
+    .logo{display:flex;gap:10px;align-items:center;font-weight:900}
+    .logo .dot{width:10px;height:10px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 4px rgba(22,163,74,.25); animation:pulse 2s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(22,163,74,.35)}70%{box-shadow:0 0 0 12px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+    nav .links a{color:var(--muted);font-weight:600;margin:0 10px}
+    nav .links a:hover{color:#fff}
     /* Hero */
-    .hero{position:relative;overflow:hidden;isolation:isolate}
-    .hero::before{content:"";position:absolute;inset:-20%;z-index:-1;background:radial-gradient(1000px 480px at 80% -10%, rgba(16,185,129,.35), transparent 55%), radial-gradient(600px 320px at 20% 110%, rgba(6,182,212,.25), transparent 65%), linear-gradient(180deg,#fff,#f0fdf4)}
-    .orb{position:absolute;width:280px;height:280px;border-radius:50%;filter:blur(30px);opacity:.35;background:conic-gradient(from 0deg, #a7f3d0, #99f6e4, #a7f3d0);animation:float 12s ease-in-out infinite}
-    .orb.o2{left:70%;top:10%;animation-duration:16s}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-    .hero .inner{display:grid;grid-template-columns:1.1fr;gap:2rem;padding:88px 0}
-    @media (min-width: 980px){.hero .inner{grid-template-columns:1.1fr .9fr;align-items:center;padding:112px 0}}
-    .kicker{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--ring);padding:.25rem .6rem;border-radius:999px;font-size:.8rem;color:#0f766e;box-shadow:var(--shadow)}
-    h1{font-size:clamp(2rem, 2.8vw + 1rem, 3.4rem);line-height:1.1;margin:.6rem 0}
-    .lead{color:var(--muted);font-size:1.05rem;max-width:58ch}
-    .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.25rem}
-    /* Phone mock */
-    .phone{background:#fff;border:1px solid var(--ring);border-radius:28px;box-shadow:0 10px 40px rgba(2,6,23,.1);padding:16px;max-width:360px;margin:0 auto;transform:perspective(900px) rotateX(2deg) rotateY(-6deg);animation:float 10s ease-in-out infinite}
-    .chat{background:#f1f5f9;border:1px solid var(--ring);border-radius:18px;height:520px;padding:12px;display:flex;flex-direction:column;gap:10px;overflow:hidden;position:relative}
-    .msg{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
-    .msg.show{opacity:1;transform:translateY(0)}
-    .bot{align-self:flex-start;max-width:78%;background:var(--brand-100);color:#064e3b;padding:10px 12px;border-radius:14px 14px 14px 6px;box-shadow:0 2px 6px rgba(16,185,129,.15)}
-    .user{align-self:flex-end;max-width:78%;background:#fff;border:1px solid var(--ring);padding:10px 12px;border-radius:14px 14px 6px 14px;box-shadow:0 2px 6px rgba(2,6,23,.06)}
-    /* Sections */
-    section{padding:72px 0}
-    h2{font-size:2rem;margin:0 0 .4rem}
-    .sub{color:var(--muted);max-width:60ch}
-    .grid{display:grid;gap:18px}
-    .cards-3{grid-template-columns:repeat(1, minmax(0,1fr))}
-    .cards-4{grid-template-columns:repeat(1, minmax(0,1fr))}
-    @media (min-width: 760px){.cards-3{grid-template-columns:repeat(3,1fr)}.cards-4{grid-template-columns:repeat(2,1fr)}}
-    @media (min-width: 1024px){.cards-4{grid-template-columns:repeat(4,1fr)}}
-    .card{background:#fff;border:1px solid var(--ring);border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(2,6,23,.06);transition:transform .2s ease, box-shadow .2s ease;transform:translateZ(0)}
-    .card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(2,6,23,.12)}
-    .icon{width:28px;height:28px;display:inline-grid;place-items:center;border-radius:10px;background:#ecfeff;color:#0ea5e9;margin-right:.5rem}
-    .check{color:#10b981;margin-right:.5rem}
+    .hero{position:relative;overflow:hidden;padding:64px 0 28px;border-bottom:1px solid rgba(255,255,255,.06);}
+    .hero .orb{position:absolute;width:520px;height:520px;border-radius:999px;right:-140px;top:-140px;background:radial-gradient(circle at 30% 30%, rgba(59,130,246,.45), rgba(59,130,246,0)); filter:blur(30px); animation:float 10s ease-in-out infinite}
+    .hero .orb2{position:absolute;width:420px;height:420px;border-radius:999px;left:-120px;bottom:-160px;background:radial-gradient(circle at 70% 70%, rgba(22,163,74,.35), rgba(22,163,74,0)); filter:blur(28px);animation:float 12s ease-in-out infinite reverse}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+    .hero .grid{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:28px}
+    .hero h1{font-size:40px;line-height:1.1;margin:0 0 10px}
+    .hero p{color:var(--muted);font-size:18px;margin:0 0 14px}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--ring);border-radius:999px;padding:6px 10px;color:#c0c7db;font-weight:700;font-size:12px;margin-bottom:10px}
+    .hero .card{background:radial-gradient(1200px 500px at 20% -10%,rgba(59,130,246,.2),transparent), #0d1530; border:1px solid #1b2b57;border-radius:16px;min-height:240px;padding:16px;animation:fadeUp .6s ease both}
+    .type{display:inline-block; border-right:2px solid #93c5fd; white-space:nowrap; overflow:hidden; animation:typing 5s steps(32,end) infinite, caret 1s step-end infinite}
+    @keyframes typing{0%{width:0}50%{width:100%}100%{width:0}}
+    @keyframes caret{50%{border-color:transparent}}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px;color:#c7d2fe;background:#0a0f22;border:1px solid #1b2b57;border-radius:12px;padding:12px;overflow:auto}
+    /* Live demos section */
+    section#live-demos{padding:36px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    #live-demos h2{margin:0 0 8px}
+    #live-demos .sub{color:var(--muted);margin:0 0 18px}
+    #live-demos .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+    #live-demos .tab{border:1px solid var(--ring);background:#0d1530;padding:10px 12px;border-radius:999px;cursor:pointer;font-weight:700;color:#dbe2f6;transition:transform .15s ease}
+    #live-demos .tab:hover{transform:translateY(-1px)}
+    #live-demos .tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    #live-demos .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    @media (max-width:960px){#live-demos .grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,#0e1630,#0c142c);border:1px solid var(--ring);border-radius:16px;box-shadow:0 20px 40px rgba(2,6,23,.22);animation:fadeUp .6s ease both}
+    .head{padding:14px 16px;border-bottom:1px solid var(--ring);display:flex;align-items:center;justify-content:space-between}
+    .head .title{font-weight:800}
+    .head .hint{font-size:12px;color:var(--muted)}
+    .chat{display:flex;flex-direction:column;height:520px}
+    .msgs{flex:1 1 auto;min-height:0;overflow:auto;padding:12px}
+    .row{display:flex;margin:6px 0}
+    .user,.bot{max-width:80%;padding:10px 12px;border-radius:12px;white-space:pre-wrap;word-wrap:break-word;font-size:14px;line-height:1.45; animation:msgIn .2s ease both}
+    @keyframes msgIn{from{transform:translateY(4px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .user{margin-left:auto;background:#10223f;border:1px solid #214a8a;color:#dbeafe}
+    .bot{background:#0f1b37;border:1px solid #21335e}
+    .inputbar{display:flex;gap:8px;align-items:center;padding:10px;border-top:1px solid var(--ring);background:#0c142c}
+    .in{flex:1;border:1px solid var(--ring);border-radius:12px;padding:10px 12px;background:#0b1228;color:#e9eefb}
+    .send{background:var(--brand);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 12px}
+    .chip{font-size:12px;border:1px solid var(--ring);background:#0b1228;color:#dbe2f6;padding:8px 10px;border-radius:999px;cursor:pointer}
+    .meta{padding:10px 16px;font-size:12px;color:var(--muted);border-top:1px dashed var(--ring)}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+    .kpi{border:1px dashed var(--ring);border-radius:12px;padding:10px;background:#0b1228}
+    .kpi .v{font-weight:800;font-size:18px;color:#fff}
+    /* Features */
+    section#features{padding:36px 0}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:960px){.features{grid-template-columns:1fr}}
+    .feat{background:#0b1228;border:1px solid var(--ring);border-radius:16px;padding:16px;animation:fadeUp .6s ease both}
+    .feat h3{margin:0 0 6px}
+    .feat p{margin:0;color:var(--muted)}
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--ring);border-radius:999px;padding:4px 8px;margin-top:8px;background:#0e1630}
+    .badge .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .badge.wait .dot{background:var(--danger)}
     /* Pricing */
-    .pricing{grid-template-columns:repeat(1, minmax(0,1fr));margin-top:18px}
-    @media (min-width: 980px){.pricing{grid-template-columns:repeat(3,1fr)}}
-    .price{display:flex;align-items:baseline;justify-content:space-between}
-    .price .amt{font-weight:800;color:#065f46;font-size:1.8rem}
-    .chip{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:#ecfeff;color:#0e7490;font-weight:700;font-size:.78rem}
-    .plan{position:relative;overflow:hidden}
-    .plan.popular{border:2px solid var(--brand);box-shadow:0 18px 42px rgba(16,185,129,.18)}
-    .save{font-size:.8rem;color:#065f46}
-    .toggle{display:inline-flex;border:1px solid var(--ring);border-radius:999px;overflow:hidden}
-    .toggle button{padding:.4rem .7rem;border:0;background:#fff;cursor:pointer;font-weight:700}
-    .toggle button.active{background:var(--brand);color:#fff}
-    /* WhatsApp CTA floating */
-    .whats-fab{position:fixed;right:16px;bottom:18px;z-index:60;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;box-shadow:0 10px 28px rgba(37,211,102,.35);animation:pulse 2.4s infinite}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
-    /* Reveal on scroll */
-    .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
-    .reveal.show{opacity:1;transform:translateY(0)}
-    footer{background:#ffffff;border-top:1px solid var(--ring)}
-    .foot{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:space-between;padding:28px 0}
-    @media (min-width: 820px){.foot{flex-direction:row}}
-    .muted{color:var(--muted)}
-
-    /* ===== Reworked Demos ===== */
-    .demo-wrap{margin-top:14px;background:#fff;border:1px solid var(--ring);border-radius:16px;box-shadow:0 10px 28px rgba(2,6,23,.06);overflow:hidden}
-    .demo-head{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid var(--ring);background:linear-gradient(180deg,#fcfffd,#f6fff9)}
-    .steps{display:flex;gap:8px;align-items:center}
-    .step{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .6rem;border-radius:999px;border:1px solid var(--ring);background:#fff;font-weight:700}
-    .step.active{background:var(--brand-100);border-color:#a7f3d0;color:#065f46}
-    .demo-body{padding:18px}
-    .demo-grid{display:grid;grid-template-columns:280px 1fr;gap:16px}
-    @media (max-width: 900px){.demo-grid{grid-template-columns:1fr}}
-    .demo-choices{border:1px solid var(--ring);border-radius:14px;overflow:hidden}
-    .choice{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--ring);background:#fff;cursor:pointer}
-    .choice:last-child{border-bottom:0}
-    .choice:hover{background:#f9fafb}
-    .choice.active{background:#ecfeff;border-left:4px solid #22d3ee}
-    .mini{font-size:.88rem;color:var(--muted)}
-    .board{border:1px solid var(--ring);border-radius:14px;background:#fbfeff;min-height:520px;position:relative;overflow:hidden}
-    .board-inner{padding:12px;height:100%;display:flex;flex-direction:column}
-    .note{font-size:.9rem;color:#0f5132;background:#ecfdf5;border:1px solid #bbf7d0;padding:.5rem .7rem;border-radius:10px;margin-bottom:8px}
-    .hidden{display:none}
-
-    /* Flow demo */
-    .bar{display:flex;gap:8px;flex-wrap:wrap}
-    .bubble{max-width:76%;padding:10px 12px;border-radius:14px;box-shadow:0 2px 6px rgba(2,6,23,.06)}
-    .bubble.bot{align-self:flex-start;background:#ecfeff;border:1px solid #cffafe}
-    .bubble.user{align-self:flex-end;background:#fff;border:1px solid var(--ring)}
-    .btn-chip{border:1px solid var(--ring);background:#fff;padding:.45rem .7rem;border-radius:999px;cursor:pointer;font-weight:700}
-    .btn-chip:hover{background:#f9fafb}
-
-    /* GPT demo */
-    .gpt-area{display:flex;flex-direction:column;height:100%}
-    .gpt-log{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px}
-    .gpt-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--ring);background:#f8fafc}
-    .gpt-input input{flex:1;padding:.8rem .9rem;border:1px solid var(--ring);border-radius:12px;font:inherit}
-
-    /* Form demo */
-    form .fld{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-    form input, form select, form textarea{padding:.8rem .9rem;border:1px solid var(--ring);border-radius:12px;font:inherit}
-    .ok{color:#065f46}
-    .err{color:#991b1b}
-  
-    /* CONCISE DEMO TABS */
-    .pilltabs{display:flex;gap:8px;flex-wrap:wrap;background:#fff;border:1px solid var(--ring);border-radius:999px;padding:6px;box-shadow:var(--shadow)}
-    .pilltabs .tab-btn{border:0;background:transparent;padding:.6rem 1rem;border-radius:999px;font-weight:800;cursor:pointer;color:#0b3b2c}
-    .pilltabs .tab-btn.active{background:var(--brand);color:#fff;box-shadow:0 6px 18px rgba(16,185,129,.25)}
-    
-</style>
+    section#pricing{padding:36px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+    .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:960px){.tiers{grid-template-columns:1fr}}
+    .tier{background:#0b1228;border:1px solid var(--ring);border-radius:16px;padding:16px;position:relative;overflow:hidden;animation:fadeUp .6s ease both}
+    .tier.best{border-color:var(--brand)}
+    .price{font-size:32px;font-weight:900;margin:8px 0}
+    .rupee{opacity:.9;font-weight:700}
+    .ul{margin:10px 0 16px;padding:0;list-style:none;color:#cbd5e1}
+    .ul li{display:flex;gap:8px;align-items:center;margin:8px 0}
+    .tick{width:16px;height:16px;border-radius:4px;background:linear-gradient(135deg,#22c55e,#16a34a);display:inline-block}
+    /* Footer */
+    footer{padding:24px 0;border-top:1px solid rgba(255,255,255,.06);color:#a7b0c7}
+    /* Fade-up animation utility */
+    @keyframes fadeUp{from{transform:translateY(6px);opacity:0}to{transform:translateY(0);opacity:1}}
+  </style>
 </head>
 <body>
   <header>
     <div class="container">
       <nav>
-        <div class="brand">
-          <svg class="logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-            <rect x="4" y="6" width="40" height="30" rx="10" fill="#A7F3D0" />
-            <path d="M6 36l6-4h24c5 0 8-3 8-8V12" stroke="#0F172A" stroke-width="2" fill="none" />
-            <circle cx="20" cy="20" r="2.2" fill="#0F172A" />
-            <circle cx="30" cy="20" r="2.2" fill="#0F172A" />
-            <path d="M20 26c2.5 2.5 5.5 2.5 8 0" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <span>ApnaBot</span>
+        <div class="left">
+          <div class="logo"><span class="dot"></span>ApnaBot</div>
+          <div class="links">
+            <a href="#live-demos">Demos</a>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+          </div>
         </div>
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#demos">Live Demos</a>
-          <a href="#whatsapp">WhatsApp</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faqs">FAQs</a>
-          <a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20a%20demo">WhatsApp Demo</a>
+        <div class="right">
+          <a class="btn alt" href="#live-demos">Try Live</a>
+          <a class="btn" href="mailto:hello@apnabot.in">Book a Demo</a>
         </div>
       </nav>
     </div>
   </header>
 
-  <section class="hero" id="home">
-    <span class="orb" style="left:-80px;top:40%"></span>
-    <span class="orb o2"></span>
+  <section class="hero">
+    <div class="orb"></div><div class="orb2"></div>
     <div class="container">
-      <div class="inner">
-        <div class="reveal">
-          <span class="kicker">WhatsApp-first • Hindi • Hinglish • English</span>
-          <h1>Apna Business ka <span style="color:var(--brand)">Digital Saathi</span></h1>
-          <p class="lead">Automate customer replies, order taking, reminders, and review responses — so your café, salon, kirana, or tuition center stays <b>always open</b> without extra staff.</p>
-          <div class="actions">
-            <a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20a%20demo">Chat on WhatsApp</a>
-            <a class="btn btn-outline" href="mailto:hello@apnabot.in">Email Us</a>
+      <div class="grid">
+        <div>
+          <span class="pill">Hinglish • Affordable • Website-Embedded</span>
+          <h1><span class="type">Your 24×7 Sales & Support teammate — right on your website</span></h1>
+          <p>ApnaBot automates FAQs, lead capture, and support for Indian SMBs. Flow‑based for predictability, GPT‑smart when you need it.</p>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <a class="btn" href="#live-demos">Try the Live Demos</a>
+            <a class="btn alt" href="#pricing">See Pricing</a>
           </div>
-          <p class="muted" style="margin-top:.5rem;font-size:.86rem">No spam. Human handover anytime.</p>
         </div>
-        <div class="reveal">
-          <div class="phone">
-            <div class="chat" id="chat">
-              <div class="bot msg">Namaste! 👋 Yeh <b>ApnaBot</b> hai — Apna Business ka Digital Saathi. Kaise madad karu?</div>
-              <div class="bot msg">1) Order/Booking • 2) Timings • 3) Location • 4) Offers</div>
-              <div class="user msg">1</div>
-              <div class="bot msg">Great! Kis date/time ke liye? WhatsApp pe confirm kar deta hu. ✅</div>
-              <div class="user msg">Kal 6PM, 2 log</div>
-              <div class="bot msg">Done. Reminder aayega T-2h aur T-30m. Aapka din shubh ho! ✨</div>
+        <div class="card">
+          <div class="code">
+&lt;script src="/apnabot-widget.js"
+        data-api-base="/api/chat"
+        data-title="ApnaBot"
+        data-welcome="Namaste! 👋 Kaise madad kar sakta hoon?"
+        data-suggest="Pricing?,Book a demo,Show features"&gt;&lt;/script&gt;
+          </div>
+          <div style="font-size:12px;color:#a7b0c7;margin-top:8px">Paste the snippet anywhere before <code>&lt;/body&gt;</code> and you're live.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= LIVE DEMOS (Flow / GPT / Lead+FAQ) ======= -->
+  <section id="live-demos">
+    <div class="container">
+      <h2>Try ApnaBot — Live Demos</h2>
+      <p class="sub">Switch templates to experience different modes: <b>Flow (Menu)</b>, <b>GPT Assistant</b>, and <b>Lead‑Capture + FAQ</b>.</p>
+
+      <div class="tabs">
+        <button class="tab active" data-t="flow">🧭 Flow Bot</button>
+        <button class="tab" data-t="gpt">🤖 GPT Assistant</button>
+        <button class="tab" data-t="lead">📇 Lead + FAQ</button>
+      </div>
+
+      <div class="grid">
+        <!-- Chat -->
+        <div class="card">
+          <div class="head"><div class="title" id="modeTitle">🧭 Flow Bot</div><div class="hint" id="modeHint">Menu-driven chat flow with zero AI cost.</div></div>
+          <div class="chat">
+            <div class="msgs" id="msgs"></div>
+            <div class="chips" id="chips"></div>
+            <div class="inputbar"><input class="in" id="input" placeholder="Type a message…" /><button class="send" id="send">Send</button></div>
+          </div>
+          <div class="meta" id="meta">Mode: Flow • Server: /api/chat • Model: gpt-4o-mini (for GPT template)</div>
+        </div>
+
+        <!-- KPIs / Info -->
+        <div class="card">
+          <div class="head"><div class="title">What this template shows</div><div class="hint">Live KPIs update as you interact</div></div>
+          <div style="padding:12px">
+            <div id="desc" style="font-size:14px;color:#dbe2f6"></div>
+            <div class="kpis">
+              <div class="kpi"><div class="v" id="kpiMsgs">0</div><div>Messages</div></div>
+              <div class="kpi"><div class="v" id="kpiLeads">0</div><div>Leads Captured</div></div>
+              <div class="kpi"><div class="v" id="kpiSaves">0</div><div>Estimated Hours Saved</div></div>
             </div>
           </div>
         </div>
@@ -190,336 +184,301 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
+  <!-- ======= FEATURES ======= -->
   <section id="features">
     <div class="container">
-      <h2 class="reveal">What ApnaBot automates</h2>
-      <p class="sub reveal">Start with quick wins, then stack automations as you grow.</p>
-      <div class="grid cards-4" style="margin-top:18px">
-        <div class="card reveal"><span class="icon">🤖</span><strong>Auto Replies</strong><br><span class="muted">Reply to every WhatsApp message in &lt;60s, even after hours.</span></div>
-        <div class="card reveal"><span class="icon">⏰</span><strong>Reminders</strong><br><span class="muted">No-show, pick-up, payment &amp; re-order reminders on autopilot.</span></div>
-        <div class="card reveal"><span class="icon">⭐</span><strong>Reviews &amp; Offers</strong><br><span class="muted">Instant replies to Google/Zomato reviews + festival offers.</span></div>
-        <div class="card reveal"><span class="icon">🧾</span><strong>Orders &amp; Billing</strong><br><span class="muted">Take orders and send UPI links. Link Vyapar/myBillBook.</span></div>
-        <div class="card reveal"><span class="icon">👥</span><strong>Human Handover</strong><br><span class="muted">Owner/staff can jump in anytime with one tap.</span></div>
-        <div class="card reveal"><span class="icon">📈</span><strong>Analytics</strong><br><span class="muted">Message volume, response time, top queries &amp; revenue impact.</span></div>
-        <div class="card reveal"><span class="icon">🌐</span><strong>Multi-lingual</strong><br><span class="muted">English • Hindi • Hinglish. Can adapt to Marathi/Tamil etc.</span></div>
-        <div class="card reveal"><span class="icon">🔒</span><strong>Permissions</strong><br><span class="muted">Role-based access for staff logins.</span></div>
-      </div>
-    </div>
-  </section>
-
-  
-  <!-- CONCISE LIVE DEMOS -->
-  <section id="demos" style="background:#ffffff">
-    <div class="container">
-      <h2 class="reveal">See it in action</h2>
-      <p class="sub reveal">Try Flow (buttons), GPT (answers), or Forms (lead capture) right here.</p>
-
-      <div class="demo-wrap reveal">
-        <div class="demo-head" style="justify-content:flex-start;gap:10px">
-          <div class="pilltabs" role="tablist" aria-label="Demo tabs">
-            <button class="tab-btn active" data-demo="flow">🧭 Flow</button>
-            <button class="tab-btn" data-demo="gpt">🧠 GPT</button>
-            <button class="tab-btn" data-demo="form">🗂️ Forms</button>
-          </div>
-          <a class="btn btn-outline" id="openStandalone" target="_blank" rel="noopener" style="margin-left:auto">Open standalone</a>
+      <h2>Features that matter</h2>
+      <div class="features">
+        <div class="feat">
+          <h3>Flow + GPT Hybrid</h3>
+          <p>Rule-based flows keep costs predictable. GPT fallback handles natural questions.</p>
+          <div class="badge"><span class="dot"></span>Reliable & Cost‑efficient</div>
         </div>
-
-        <div class="demo-body">
-          <div class="board">
-            <div class="board-inner">
-              <div class="note" id="demoHint">Tap a quick button to see guided replies.</div>
-
-              <!-- FLOW -->
-              <div id="view-flow">
-                <div class="chat" id="flowChat">
-                  <div class="bubble bot">Namaste! 👋 Main ApnaBot. Kaise madad karu?</div>
-                  <div class="bar" style="margin-top:auto">
-                    <button class="btn-chip" data-msg="🍽️ Book a table">🍽️ Book a table</button>
-                    <button class="btn-chip" data-msg="🏷️ Today's offers">🏷️ Today's offers</button>
-                    <button class="btn-chip" data-msg="📦 Track order">📦 Track order</button>
-                    <button class="btn-chip" data-msg="🕘 Store timings">🕘 Store timings</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- GPT -->
-              <div id="view-gpt" class="hidden">
-                <div class="gpt-area">
-                  <div class="gpt-log" id="gptLog">
-                    <div class="bubble bot">Ask me about products, shipping, returns, or pricing.</div>
-                  </div>
-                  <div class="gpt-input">
-                    <input id="gptInput" type="text" placeholder="e.g., Do you deliver to Thane?" />
-                    <button id="gptSend" class="btn">Send</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- FORM -->
-              <div id="view-form" class="hidden">
-                <form id="leadForm">
-                  <div class="fld"><label>Full name</label><input name="name" placeholder="Tejas Nikhar" required /></div>
-                  <div class="fld"><label>Phone</label><input name="phone" placeholder="+91 98xxxxxxx" required pattern="^[0-9+\-\s]{8,15}$" /></div>
-                  <div class="fld"><label>Service</label>
-                    <select name="service" required>
-                      <option value="">Choose…</option>
-                      <option>Kirana orders</option>
-                      <option>Salon bookings</option>
-                      <option>Café reservations</option>
-                      <option>Tuition enquiries</option>
-                    </select>
-                  </div>
-                  <div class="fld"><label>Message</label><textarea name="msg" rows="3" placeholder="Tell us a bit…"></textarea></div>
-                  <button class="btn" type="submit">Submit</button>
-                  <p id="formNote" class="muted"></p>
-                </form>
-              </div>
-
-              <div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap">
-                <a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20a%20demo%20like%20this">Go to WhatsApp</a>
-                <a class="btn btn-outline" href="#pricing">See Pricing</a>
-              </div>
-            </div>
-          </div>
+        <div class="feat">
+          <h3>Lead Capture & Handover</h3>
+          <p>Collect name/phone/business on the site, then handoff to WhatsApp/CRM if needed.</p>
+          <div class="badge"><span class="dot"></span>High‑intent lead forms</div>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- WHATSApp INTEGRATION -->
-  <section id="whatsapp" style="background:#ffffff">
-    <div class="container">
-      <div class="reveal">
-        <h2>WhatsApp Integration</h2>
-        <p class="sub">Connect your existing number or a new dedicated one. We support official <b>WhatsApp Business API</b> via Meta Cloud or approved BSPs.</p>
-      </div>
-      <div class="grid cards-3" style="margin-top:18px">
-        <div class="card reveal">
-          <strong>1) Verify Business</strong>
-          <p class="muted">Meta Business verification + display name approval. We guide you through documents and setup.</p>
+        <div class="feat">
+          <h3>Hinglish + Vernacular</h3>
+          <p>English, Hindi, Marathi support from day one. More on request.</p>
+          <div class="badge"><span class="dot"></span>Made for India</div>
         </div>
-        <div class="card reveal">
-          <strong>2) Choose Route</strong>
-          <p class="muted">Use <b>Cloud API</b> (Meta) or a BSP (e.g., Interakt/Gupshup/Twilio). We plug ApnaBot into your chosen route.</p>
+        <div class="feat">
+          <h3>WhatsApp Integration</h3>
+          <p>Bring the same flows to WhatsApp. Start on web, extend to DMs without rework.</p>
+          <div class="badge wait"><span class="dot"></span>Beta • Join the waitlist</div>
         </div>
-        <div class="card reveal">
-          <strong>3) Templates &amp; Go-Live</strong>
-          <p class="muted">We create message templates (reminders, offers, OTPs), map flows, and launch. Human handover stays on WhatsApp.</p>
+        <div class="feat">
+          <h3>Owner Dashboard</h3>
+          <p>See chats, export leads, edit FAQs & flows. No code required.</p>
+          <div class="badge"><span class="dot"></span>Coming soon</div>
         </div>
-      </div>
-      <div class="card reveal" style="margin-top:16px">
-        <div style="display:flex;flex-direction:column;gap:.6rem">
-          <div><span class="chip">Included</span> Number linking • Template drafting • Basic flows • Team training</div>
-          <div><span class="chip" style="background:#fef3c7;color:#92400e">Note</span> WhatsApp conversation charges billed as per Meta/BSP. We’ll estimate your monthly cost.</div>
-          <div class="actions">
-            <a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20help%20me%20connect%20WhatsApp">Connect my WhatsApp</a>
-            <a class="btn btn-outline" href="#pricing">See Pricing</a>
-          </div>
+        <div class="feat">
+          <h3>Quick Embed</h3>
+          <p>One script tag. Shadow DOM widget or inline embed — your choice.</p>
+          <div class="badge"><span class="dot"></span>Takes 2 minutes</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
+  <!-- ======= PRICING ======= -->
   <section id="pricing">
     <div class="container">
-      <div class="reveal" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <div>
-          <h2>Simple pricing (INR)</h2>
-          <p class="sub">Start small. Upgrade when you see results.</p>
+      <h2>Simple, transparent pricing</h2>
+      <p style="color:var(--muted);margin:6px 0 18px">Start on web today. Add WhatsApp when you're ready.</p>
+      <div class="tiers">
+        <div class="tier">
+          <div class="badge"><span class="dot"></span>Starter</div>
+          <div class="price"><span class="rupee">₹</span>499<span style="font-size:14px;color:#a7b0c7">/mo</span></div>
+          <ul class="ul">
+            <li><span class="tick"></span> Website widget & inline chat</li>
+            <li><span class="tick"></span> 1 flow template</li>
+            <li><span class="tick"></span> 500 GPT messages</li>
+            <li><span class="tick"></span> Email support</li>
+          </ul>
+          <button class="btn" onclick="window.location='mailto:hello@apnabot.in?subject=Starter Plan'">Get Started</button>
         </div>
-        <div class="toggle" aria-label="Billing period">
-          <button id="mBtn" class="active" type="button">Monthly</button>
-          <button id="yBtn" type="button">Yearly <span class="save">save 15%</span></button>
+        <div class="tier best">
+          <div class="badge"><span class="dot"></span>Growth</div>
+          <div class="price"><span class="rupee">₹</span>1499<span style="font-size:14px;color:#a7b0c7">/mo</span></div>
+          <ul class="ul">
+            <li><span class="tick"></span> Everything in Starter</li>
+            <li><span class="tick"></span> 3 flow templates</li>
+            <li><span class="tick"></span> 3,000 GPT messages</li>
+            <li><span class="tick"></span> Lead export (CSV)</li>
+            <li><span class="tick"></span> Priority support</li>
+          </ul>
+          <button class="btn" onclick="window.location='mailto:hello@apnabot.in?subject=Growth Plan'">Choose Growth</button>
+        </div>
+        <div class="tier">
+          <div class="badge"><span class="dot"></span>Pro</div>
+          <div class="price"><span class="rupee">₹</span>4999<span style="font-size:14px;color:#a7b0c7">/mo</span></div>
+          <ul class="ul">
+            <li><span class="tick"></span> Everything in Growth</li>
+            <li><span class="tick"></span> Unlimited flows</li>
+            <li><span class="tick"></span> 10,000 GPT messages</li>
+            <li><span class="tick"></span> WhatsApp integration <b>(Beta)</b></li>
+            <li><span class="tick"></span> Dedicated onboarding</li>
+          </ul>
+          <button class="btn" onclick="window.location='mailto:hello@apnabot.in?subject=Pro Plan'">Talk to Sales</button>
         </div>
       </div>
-
-      <div class="grid pricing">
-        <div class="card plan reveal">
-          <div class="price"><strong>Starter</strong><span class="amt" data-m="₹999" data-y="₹849">₹999<span class="muted" style="font-weight:600">/mo</span></span></div>
-          <ul>
-            <li><span class="check">✔</span> WhatsApp greeting &amp; FAQs</li>
-            <li><span class="check">✔</span> Auto review replies</li>
-            <li><span class="check">✔</span> Owner handover button</li>
-            <li><span class="check">✔</span> Basic analytics</li>
-          </ul>
-          <p><a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20Starter">Start Trial</a></p>
-        </div>
-        <div class="card plan popular reveal">
-          <div class="price"><strong>Growth</strong><span class="amt" data-m="₹1,999" data-y="₹1,699">₹1,999<span class="muted" style="font-weight:600">/mo</span></span></div>
-          <div class="chip">Popular</div>
-          <ul>
-            <li><span class="check">✔</span> All Starter</li>
-            <li><span class="check">✔</span> No-show &amp; payment reminders</li>
-            <li><span class="check">✔</span> Simple offers &amp; broadcasts</li>
-            <li><span class="check">✔</span> Monthly report</li>
-          </ul>
-          <p><a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20Choose%20Growth">Choose Growth</a></p>
-        </div>
-        <div class="card plan reveal">
-          <div class="price"><strong>Pro</strong><span class="amt" data-m="₹4,999" data-y="₹4,249">₹4,999<span class="muted" style="font-weight:600">/mo</span></span></div>
-          <ul>
-            <li><span class="check">✔</span> All Growth</li>
-            <li><span class="check">✔</span> Vyapar/myBillBook link</li>
-            <li><span class="check">✔</span> Inventory low-stock alerts</li>
-            <li><span class="check">✔</span> Custom workflows</li>
-          </ul>
-          <p><a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20Talk%20about%20Pro">Talk to Sales</a></p>
-        </div>
-      </div>
-      <p class="muted reveal" style="margin-top:8px">Add-ons: WhatsApp BSP/Cloud conversation fees billed separately. Implementation available on request.</p>
-    </div>
-  </section>
-
-  <!-- FAQS -->
-  <section id="faqs">
-    <div class="container">
-      <h2 class="reveal">FAQs</h2>
-      <details class="card reveal"><summary><strong>Do I need new hardware or apps?</strong></summary><div class="muted">No. ApnaBot runs on your existing WhatsApp Business and browser. Optional links to Vyapar/myBillBook.</div></details>
-      <details class="card reveal"><summary><strong>Which languages are supported?</strong></summary><div class="muted">English, Hindi, and Hinglish by default. We can adapt to Marathi/Bengali/Tamil for key flows.</div></details>
-      <details class="card reveal"><summary><strong>Can humans take over the chat?</strong></summary><div class="muted">Always. Your staff/owner can jump in anytime. ApnaBot is designed for human-in-the-loop control.</div></details>
-      <details class="card reveal"><summary><strong>What’s the typical setup time?</strong></summary><div class="muted">One day for the quick win (auto replies + reviews). Advanced flows roll out over 2–4 weeks.</div></details>
+      <p style="color:#93c5fd;margin-top:10px;font-size:12px">* WhatsApp integration is in Beta — limited spots. Ask us to enable it on your account.</p>
     </div>
   </section>
 
   <footer>
-    <div class="container foot">
-      <div style="display:flex;align-items:center;gap:.5rem">
-        <svg class="logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-          <rect x="4" y="6" width="40" height="30" rx="10" fill="#A7F3D0" />
-          <path d="M6 36l6-4h24c5 0 8-3 8-8V12" stroke="#0F172A" stroke-width="2" fill="none" />
-          <circle cx="20" cy="20" r="2.2" fill="#0F172A" />
-          <circle cx="30" cy="20" r="2.2" fill="#0F172A" />
-          <path d="M20 26c2.5 2.5 5.5 2.5 8 0" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <strong>ApnaBot</strong>
-      </div>
-      <div class="muted">Made for Indian SMBs • WhatsApp-first • Hindi • English</div>
-      <div class="muted">© <span id="year"></span> ApnaBot • <a href="#">Privacy</a> • <a href="#">Terms</a> • <a href="https://wa.me/919820432898">WhatsApp</a></div>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <div>© <span id="year"></span> ApnaBot</div>
+      <div style="color:#8da0c6">Built in Thane 💙</div>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp FAB -->
-  <a class="whats-fab" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20a%20demo" aria-label="Chat on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M20.52 3.48A11.8 11.8 0 0 0 12.01 0C5.38 0 .02 5.36.02 11.99c0 2.11.56 4.16 1.62 5.97L0 24l6.22-1.62a11.97 11.97 0 0 0 5.8 1.49h.01c6.63 0 11.99-5.36 11.99-11.99a11.9 11.9 0 0 0-3.5-8.39ZM12.03 22.2h-.01a10.2 10.2 0 0 1-5.2-1.43l-.37-.22-3.69.96.99-3.6-.24-.37a10.2 10.2 0 1 1 8.52 4.66Zm5.61-7.61c-.31-.15-1.8-.89-2.08-.98-.28-.1-.48-.15-.68.15-.2.31-.78.98-.96 1.19-.18.2-.35.23-.66.08-.31-.16-1.29-.48-2.46-1.54-.91-.81-1.52-1.81-1.7-2.12-.18-.31-.02-.48.13-.63.13-.13.31-.35.46-.53.15-.18.2-.31.3-.51.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.26-.24-.59-.49-.51-.68-.52l-.58-.01c-.2 0-.53.08-.81.38-.28.31-1.07 1.04-1.07 2.55 0 1.5 1.1 2.95 1.25 3.15.15.2 2.17 3.31 5.26 4.64.74.32 1.31.51 1.76.65.74.23 1.42.2 1.95.12.59-.09 1.8-.74 2.05-1.46.25-.72.25-1.34.18-1.46-.07-.12-.28-.2-.6-.35Z"/>
-    </svg>
-  </a>
-
+  <!-- Inline scripts for the demo templates + animations -->
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Reveal on scroll
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
-    }, {threshold: .15});
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    // --- Config ---
+    const API_URL = "/api/chat";
+    const SYSTEM_PROMPT =
+      "You are ApnaBot, a concise Hinglish assistant for Indian SMBs. If user asks about pricing, propose Starter ₹499, Growth ₹1499, Pro ₹4999. Keep answers short.";
 
-    // Chat message staggered reveal
-    const msgs = Array.from(document.querySelectorAll('#chat .msg'));
-    msgs.forEach((m, i)=> setTimeout(()=> m.classList.add('show'), 500 + i*700) );
+    const FLOW = {
+      welcome: "Welcome to Cedar Fitness! Choose an option:",
+      menu: {
+        "1": { label: "🗓️ Class Schedule", reply: "Mon-Fri: 6am-10pm\nSat-Sun: 7am-9pm" },
+        "2": { label: "💳 Membership Plans", reply: "Monthly ₹999 | Quarterly ₹2499 | Yearly ₹7999" },
+        "3": { label: "📍 Location", reply: "Dosti West County, Thane" },
+        "4": { label: "👨‍🏫 Trainer Demo", reply: "Join our free trial class. Reply with your name to schedule." }
+      },
+      chips: ["1","2","3","4"]
+    };
 
-    // Pricing toggle
-    const mBtn = document.getElementById('mBtn'), yBtn = document.getElementById('yBtn');
-    const amts = Array.from(document.querySelectorAll('.amt'));
-    mBtn?.addEventListener('click', ()=>{
-      mBtn.classList.add('active'); yBtn.classList.remove('active');
-      amts.forEach(a=> a.firstChild.nodeValue = a.dataset.m );
-    });
-    yBtn?.addEventListener('click', ()=>{
-      yBtn.classList.add('active'); mBtn.classList.remove('active');
-      amts.forEach(a=> a.firstChild.nodeValue = a.dataset.y );
-    });
-
-    
-    // ===== Demos logic (concise tabs) =====
-    const tabBtns = Array.from(document.querySelectorAll('.pilltabs .tab-btn'));
-    const views = { flow: document.getElementById('view-flow'), gpt: document.getElementById('view-gpt'), form: document.getElementById('view-form') };
-    let activeKey = 'flow';
-    function showTab(key){
-      activeKey = key;
-      tabBtns.forEach(b=> b.classList.toggle('active', b.dataset.demo===key));
-      Object.entries(views).forEach(([k,el])=> el.classList.toggle('hidden', k!==key));
-      const hint = key==='flow' ? 'Tap a quick button to see guided replies.' :
-                  key==='gpt'  ? 'Type a question and send to see a sample answer.' :
-                                 'Fill the form and submit to see validation/feedback.';
-      const hintEl = document.getElementById('demoHint'); if (hintEl) hintEl.textContent = hint;
-      updateStandaloneLink();
-    }
-    tabBtns.forEach(b=> b.addEventListener('click', ()=> showTab(b.dataset.demo)));
-    function updateStandaloneLink(){
-      const openStandalone = document.getElementById('openStandalone');
-      if(!openStandalone) return;
-      const hash = activeKey==='flow' ? '#flow' : activeKey==='gpt' ? '#gpt' : '#forms';
-      openStandalone.href = 'embedded-templates.html'+hash;
-    }
-    fetch('embedded-templates.html', {method:'HEAD'}).then(r=>{
-      if(!r.ok) document.getElementById('openStandalone').classList.add('hidden');
-      else updateStandaloneLink();
-    }).catch(()=> document.getElementById('openStandalone').classList.add('hidden'));
-
-    // Flow interactions
-    const flowChat = document.getElementById('flowChat');
-    function pushFlow(role,text){
-      const d=document.createElement('div'); d.className='bubble '+(role==='user'?'user':'bot');
-      d.textContent=text; flowChat.insertBefore(d, flowChat.lastElementChild); flowChat.scrollTop=flowChat.scrollHeight;
-    }
-    document.querySelectorAll('.btn-chip').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const msg = btn.dataset.msg; pushFlow('user', msg);
-        setTimeout(()=>{
-          let a='';
-          if(msg.includes('Book')) a='Great! Date/time batao. T-2h & T-30m reminder set hoga.';
-          else if(msg.includes('offers')) a='Aaj ki offer: Buy 2 get 1 free • Code: APNA3';
-          else if(msg.includes('Track')) a='Order #DC123 out for delivery. ETA 42 min.';
-          else a='Mon–Sun: 9am–10pm. Dosti West County, Thane.';
-          pushFlow('bot', a);
-        }, 450);
-      });
-    });
-
-    // GPT mock
-    const gptLog = document.getElementById('gptLog');
-    const gptInput = document.getElementById('gptInput');
-    const gptSend = document.getElementById('gptSend');
-    function gpush(role,text){
-      const d=document.createElement('div'); d.className='bubble '+(role==='user'?'user':'bot');
-      d.textContent=text; gptLog.appendChild(d); gptLog.scrollTop=gptLog.scrollHeight;
-    }
-    function answer(q){
-      if(/deliver|thane|shipping/i.test(q)) return 'Yes, we deliver across Thane within 60–90 minutes. Free delivery above ₹499.';
-      if(/return|refund/i.test(q)) return 'Hassle-free returns within 7 days. Instant refund for UPI payments.';
-      if(/price|cost|plan/i.test(q)) return 'Plans below — Starter ₹999/mo, Growth ₹1,999/mo, Pro ₹4,999/mo.';
-      return 'Got it! I can answer product, pricing, shipping, and policy queries.';
-    }
-    gptSend?.addEventListener('click', ()=>{
-      const q=(gptInput.value||'').trim(); if(!q) return; gpush('user', q); gptInput.value='';
-      setTimeout(()=> gpush('bot', answer(q)), 550);
-    });
-    gptInput?.addEventListener('keydown', (e)=>{ if(e.key==='Enter') gptSend.click(); });
-
-    // Form validation
-    const leadForm = document.getElementById('leadForm');
-    const formNote = document.getElementById('formNote');
-    leadForm?.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(leadForm).entries());
-      if(!data.name || !data.phone || !data.service){
-        formNote.textContent='Please fill all required fields.'; formNote.className='err'; return;
+    const LEAD_FAQ = {
+      leadFields: [
+        { key: "name", label: "Your Name" },
+        { key: "phone", label: "Phone" },
+        { key: "business", label: "Business Type" }
+      ],
+      faqs: {
+        pricing: "Starter ₹499/mo, Growth ₹1499/mo, Pro ₹4999/mo.",
+        channels: "Web, WhatsApp (coming), Facebook, and Instagram DMs.",
+        languages: "English, Hindi, Marathi (more on request)."
       }
-      formNote.className='ok';
-      formNote.textContent='Thanks! We will WhatsApp you at ' + data.phone + ' within 10 minutes.';
-    });
+    };
 
-    // init
-    showTab('flow');
-    // Set initial
-    
-    show('flow');
+    // ====== 3 Template Demo Logic (hardened) ======
+    (function initDemos() {
+      const root = document.querySelector("#live-demos");
+      if (!root) return console.error("[ApnaBot] #live-demos not found");
+
+      const tabs = root.querySelectorAll(".tab");
+      const msgs = root.querySelector("#msgs");
+      const chips = root.querySelector("#chips");
+      const input = root.querySelector("#input");
+      const sendBtn = root.querySelector("#send");
+      const modeTitle = root.querySelector("#modeTitle");
+      const modeHint = root.querySelector("#modeHint");
+      const meta = root.querySelector("#meta");
+      const desc = root.querySelector("#desc");
+
+      if (!msgs || !input || !sendBtn) {
+        console.error("[ApnaBot] Demo DOM missing elements");
+        return;
+      }
+
+      let mode = "flow";
+      let kpiMsgs = 0, kpiLeads = 0, kpiSaves = 0;
+      let leadDraft = { name: "", phone: "", business: "" };
+      let sessionId = localStorage.getItem("apnabot_demo_sid") || Math.random().toString(36).slice(2);
+      localStorage.setItem("apnabot_demo_sid", sessionId);
+
+      function updateKPIs() {
+        const m = document.getElementById("kpiMsgs");
+        const l = document.getElementById("kpiLeads");
+        const s = document.getElementById("kpiSaves");
+        if (m) m.textContent = kpiMsgs;
+        if (l) l.textContent = kpiLeads;
+        if (s) s.textContent = kpiSaves.toFixed(1);
+      }
+
+      function scrollToBottom() {
+        msgs.scrollTop = msgs.scrollHeight;
+        requestAnimationFrame(() => (msgs.scrollTop = msgs.scrollHeight));
+      }
+
+      function addMsg(role, text) {
+        const row = document.createElement("div");
+        row.className = "row";
+        const b = document.createElement("div");
+        b.className = role === "user" ? "user" : "bot";
+        b.textContent = text;
+        row.appendChild(b);
+        msgs.appendChild(row);
+        kpiMsgs++; updateKPIs();
+        scrollToBottom();
+      }
+
+      function mkChip(label) {
+        const c = document.createElement("button");
+        c.className = "chip";
+        c.textContent = label;
+        c.onclick = () => { input.value = label; sendBtn.click(); };
+        chips.appendChild(c);
+      }
+
+      function setMode(next) {
+        mode = next;
+        tabs.forEach(t => t.classList.toggle("active", t.dataset.t === mode));
+        msgs.innerHTML = ""; chips.innerHTML = "";
+        if (mode === "flow") {
+          modeTitle.textContent = "🧭 Flow Bot";
+          modeHint.textContent = "Menu-driven chat flow with zero AI cost.";
+          meta.textContent = "Mode: Flow • No API calls";
+          desc.innerHTML = "This template simulates a <b>rule-based chat flow</b> ideal for FAQs, store hours, simple routing. No LLM calls → predictable & low-cost.";
+          addMsg("assistant",
+            FLOW.welcome + "\n\n" + Object.entries(FLOW.menu).map(([k, v]) => `${k}. ${v.label}`).join("\n")
+          );
+          FLOW.chips.forEach(c => mkChip(c));
+        }
+        if (mode === "gpt") {
+          modeTitle.textContent = "🤖 GPT Assistant";
+          modeHint.textContent = "Natural conversations powered by the server LLM.";
+          meta.textContent = "Mode: GPT • Server: /api/chat • Model: gpt-4o-mini";
+          desc.innerHTML = "A concise, Hinglish-fluent assistant. Shows <b>free text</b> conversations, pricing guidance, and general queries. Calls your backend <code>/api/chat</code>.";
+          addMsg("assistant", "Namaste! Main ApnaBot GPT Assistant hoon. Kuch bhi puchhiye — pricing, features, integrations…");
+          ["Pricing?", "What channels?", "Show onboarding steps"].forEach(c => mkChip(c));
+        }
+        if (mode === "lead") {
+          modeTitle.textContent = "📇 Lead + FAQ";
+          modeHint.textContent = "Captures lead details, answers common questions, falls back to GPT if needed.";
+          meta.textContent = "Mode: Lead/FAQ • Hybrid (local + GPT fallback)";
+          desc.innerHTML = "Collect <b>lead info</b> (name/phone/business), answer <b>common FAQs instantly</b>, and fallback to GPT for unknowns. Great for websites needing conversion.";
+          leadDraft = { name: "", phone: "", business: "" };
+          addMsg("assistant", "Thanks for your interest in ApnaBot! May I know your name?");
+          ["My name is…", "What are your prices?", "Which languages?"].forEach(c => mkChip(c));
+        }
+      }
+
+      function handleFlow(txt) {
+        const key = txt.replace(/[^0-9]/g, "");
+        if (FLOW.menu[key]) { addMsg("assistant", FLOW.menu[key].reply); if (key === "4") kpiSaves += 0.2; return updateKPIs(); }
+        if (/name|book|trial|demo/i.test(txt)) { addMsg("assistant", "Great! Please reply with your name and phone to confirm your trial class."); kpiLeads += 1; return updateKPIs(); }
+        addMsg("assistant", "Please choose 1, 2, 3 or 4 from the menu above.");
+      }
+
+      async function callGPT(txt) {
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              session_id: sessionId,
+              message: txt,
+              history: [{ role: "system", content: SYSTEM_PROMPT }]
+            })
+          });
+          if (!res.ok) {
+            const errText = await res.text();
+            console.error("[ApnaBot] GPT fetch failed", res.status, errText);
+            addMsg("assistant", "⚠️ Server error (" + res.status + "). Please try again.");
+            return;
+          }
+          const data = await res.json();
+          addMsg("assistant", data.reply || "(no reply)");
+          kpiSaves += 0.1; updateKPIs();
+        } catch (e) {
+          console.error("[ApnaBot] GPT fetch exception", e);
+          addMsg("assistant", "⚠️ Network error. Please try again.");
+        }
+      }
+
+      async function handleLead(txt) {
+        if (!leadDraft.name && /name|i am|i'm|this is/i.test(txt)) {
+          leadDraft.name = txt.replace(/.*?(name is|i am|i'm|this is)/i, "").trim();
+          return addMsg("assistant", "Hi " + (leadDraft.name || "there") + "! Could you share your phone number?");
+        }
+        if (!leadDraft.phone && /(\+?\d[\d\s-]{8,})/.test(txt)) {
+          leadDraft.phone = (txt.match(/(\+?\d[\d\s-]{8,})/)[0] || "").trim();
+          return addMsg("assistant", "Thanks! What business do you run?");
+        }
+        if (!leadDraft.business && /(shop|real estate|coaching|gym|salon|restaurant|school|clinic|hotel|agency|factory|service|business)/i.test(txt)) {
+          leadDraft.business = txt; kpiLeads += 1; updateKPIs();
+          return addMsg("assistant", "Noted. Quick FAQ: ask about pricing, channels or languages. For anything else, just ask!");
+        }
+        const key = Object.keys(LEAD_FAQ.faqs).find(k => new RegExp(k, "i").test(txt));
+        if (key) { kpiSaves += 0.2; updateKPIs(); return addMsg("assistant", LEAD_FAQ.faqs[key]); }
+        await callGPT(txt);
+      }
+
+      async function handleSend() {
+        const txt = (input.value || "").trim();
+        if (!txt) return;
+        input.value = "";
+        addMsg("user", txt);
+        if (mode === "flow") return handleFlow(txt);
+        if (mode === "gpt") return callGPT(txt);
+        if (mode === "lead") return handleLead(txt);
+      }
+
+      // Wire events
+      tabs.forEach(t => t.addEventListener("click", () => setMode(t.dataset.t)));
+      sendBtn.addEventListener("click", handleSend);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
+      });
+
+      // Boot
+      setMode("flow");
+    })();
+
+    // Reveal-on-scroll animation (intersection observer)
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.animationDelay = (e.target.dataset.delay||'0')+'s'; e.target.classList.add('in'); } });
+    }, {threshold: .1});
+    document.querySelectorAll('.card, .feat, .tier').forEach(el=>{el.dataset.delay = (Math.random()*0.2).toFixed(2); io.observe(el)});
   </script>
 </body>
 </html>
