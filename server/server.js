@@ -6,6 +6,15 @@ import twilio from 'twilio';
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Simple landing + health endpoints
+app.get('/', (req, res) => {
+  res.type('text').send('ApnaBot WhatsApp API is running ✅');
+});
+
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ ok: true, uptime: process.uptime() });
+});
+
 
 // If your website runs from a different origin, uncomment CORS below
 // import cors from 'cors'; app.use(cors());
