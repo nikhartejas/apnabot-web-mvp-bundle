@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ApnaBot – 3 Demo Templates</title>
+  <style>
+    :root{--brand:#2563eb;--bg:#f8fafc;--card:#fff;--muted:#64748b;--border:#e5e7eb}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#0f172a}
+    .wrap{max-width:1000px;margin:28px auto;padding:0 16px}
+    h1{font-size:24px;margin:0 0 8px}
+    p.top{color:var(--muted);margin:0 0 18px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+    .tab{border:1px solid var(--border);background:#fff;padding:10px 12px;border-radius:999px;cursor:pointer}
+    .tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 12px 24px rgba(2,6,23,.05)}
+    .head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .head .title{font-weight:700}
+    .head .hint{font-size:12px;color:var(--muted)}
+    .chat{display:flex;flex-direction:column;height:520px}
+    .msgs{flex:1 1 auto;min-height:0;overflow:auto;padding:12px}
+    .row{display:flex;margin:6px 0}
+    .user,.bot{max-width:80%;padding:10px 12px;border-radius:12px;white-space:pre-wrap;word-wrap:break-word;font-size:14px;line-height:1.45}
+    .user{margin-left:auto;background:#e0f2fe;border:1px solid #bae6fd}
+    .bot{background:#fff;border:1px solid var(--border)}
+    .inputbar{display:flex;gap:8px;align-items:center;padding:10px;border-top:1px solid var(--border)}
+    .in{flex:1;border:1px solid var(--border);border-radius:12px;padding:10px 12px;font:14px system-ui}
+    .send{background:var(--brand);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 12px}
+    .chip{font-size:12px;border:1px solid var(--border);background:#fff;padding:8px 10px;border-radius:999px;cursor:pointer}
+    .meta{padding:10px 16px;font-size:12px;color:var(--muted);border-top:1px dashed var(--border)}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+    .kpi{border:1px dashed var(--border);border-radius:12px;padding:10px;background:#fff}
+    .kpi .v{font-weight:800;font-size:18px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>ApnaBot – Live Demo Templates</h1>
+    <p class="top">Switch templates to experience different modes: <b>Flow (Menu) Bot</b>, <b>GPT Assistant</b>, and <b>Lead‑Capture + FAQ</b>.</p>
+
+    <div class="tabs">
+      <button class="tab active" data-t="flow">🧭 Flow Bot</button>
+      <button class="tab" data-t="gpt">🤖 GPT Assistant</button>
+      <button class="tab" data-t="lead">📇 Lead + FAQ</button>
+    </div>
+
+    <div class="grid">
+      <!-- Left: Chat Surface -->
+      <div class="card">
+        <div class="head"><div class="title" id="modeTitle">🧭 Flow Bot</div><div class="hint" id="modeHint">Menu-driven chat flow with zero AI cost.</div></div>
+        <div class="chat">
+          <div class="msgs" id="msgs"></div>
+          <div class="chips" id="chips"></div>
+          <div class="inputbar"><input class="in" id="input" placeholder="Type a message…" /><button class="send" id="send">Send</button></div>
+        </div>
+        <div class="meta" id="meta">Mode: Flow • Server: /api/chat • Model: gpt-4o-mini (for GPT template)</div>
+      </div>
+
+      <!-- Right: Template Info / KPIs -->
+      <div class="card">
+        <div class="head"><div class="title">What this template shows</div><div class="hint">Live KPIs update as you interact</div></div>
+        <div style="padding:12px">
+          <div id="desc" style="font-size:14px;color:#0f172a"></div>
+          <div class="kpis">
+            <div class="kpi"><div class="v" id="kpiMsgs">0</div><div>Messages</div></div>
+            <div class="kpi"><div class="v" id="kpiLeads">0</div><div>Leads Captured</div></div>
+            <div class="kpi"><div class="v" id="kpiSaves">0</div><div>Estimated Hours Saved</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------- Config -------
+    const API_URL = "/api/chat"; // your running server
+
+    // Flow template: simple finite-state menus
+    const FLOW = {
+      welcome: "Welcome to Cedar Fitness! Choose an option:",
+      menu: {
+        "1": { label: "🗓️ Class Schedule", reply: "Mon-Fri: 6am-10pm\nSat-Sun: 7am-9pm" },
+        "2": { label: "💳 Membership Plans", reply: "Monthly ₹999 | Quarterly ₹2499 | Yearly ₹7999" },
+        "3": { label: "📍 Location", reply: "Dosti West County, Thane" },
+        "4": { label: "👨‍🏫 Trainer Demo", reply: "Join our free trial class. Reply with your name to schedule." }
+      },
+      chips: ["1", "2", "3", "4"]
+    };
+
+    // GPT template: direct LLM conversations with system prompt
+    const SYSTEM_PROMPT = "You are ApnaBot, a concise Hinglish assistant for Indian SMBs. If user asks about pricing, propose Starter ₹499, Growth ₹1499, Pro ₹4999. Keep answers short.";
+
+    // Lead + FAQ template: collects basic info then answers FAQs locally, falling back to GPT for unknowns
+    const LEAD_FAQ = {
+      leadFields: [
+        { key: "name", label: "Your Name" },
+        { key: "phone", label: "Phone" },
+        { key: "business", label: "Business Type" }
+      ],
+      faqs: {
+        "pricing": "Starter ₹499/mo, Growth ₹1499/mo, Pro ₹4999/mo.",
+        "channels": "Web, WhatsApp (coming), Facebook, and Instagram DMs.",
+        "languages": "English, Hindi, Marathi (more on request)."
+      }
+    };
+
+    // ------- DOM -------
+    const tabs = document.querySelectorAll(".tab");
+    const msgs = document.getElementById("msgs");
+    const chips = document.getElementById("chips");
+    const input = document.getElementById("input");
+    const sendBtn = document.getElementById("send");
+    const modeTitle = document.getElementById("modeTitle");
+    const modeHint = document.getElementById("modeHint");
+    const meta = document.getElementById("meta");
+    const desc = document.getElementById("desc");
+
+    // ------- State -------
+    let mode = "flow"; // flow | gpt | lead
+    let kpiMsgs = 0, kpiLeads = 0, kpiSaves = 0;
+    let leadDraft = { name: "", phone: "", business: "" };
+    let sessionId = localStorage.getItem("apnabot_demo_sid") || Math.random().toString(36).slice(2);
+    localStorage.setItem("apnabot_demo_sid", sessionId);
+
+    function updateKPIs() {
+      document.getElementById("kpiMsgs").textContent = kpiMsgs;
+      document.getElementById("kpiLeads").textContent = kpiLeads;
+      document.getElementById("kpiSaves").textContent = kpiSaves.toFixed(1);
+    }
+
+    function scrollToBottom(){ msgs.scrollTop = msgs.scrollHeight; requestAnimationFrame(()=>msgs.scrollTop = msgs.scrollHeight); }
+
+    function addMsg(role, text){
+      const row = document.createElement("div");
+      row.className = "row";
+      const b = document.createElement("div");
+      b.className = role === "user" ? "user" : "bot";
+      b.textContent = text;
+      row.appendChild(b);
+      msgs.appendChild(row);
+      kpiMsgs++; updateKPIs();
+      scrollToBottom();
+    }
+
+    function setMode(next){
+      mode = next;
+      tabs.forEach(t=>t.classList.toggle("active", t.dataset.t===mode));
+      msgs.innerHTML = ""; chips.innerHTML = "";
+      if(mode === "flow"){
+        modeTitle.textContent = "🧭 Flow Bot";
+        modeHint.textContent = "Menu-driven chat flow with zero AI cost.";
+        meta.textContent = "Mode: Flow • No API calls";
+        desc.innerHTML = "This template simulates a <b>rule-based chat flow</b> ideal for FAQs, store hours, simple routing. No LLM calls → predictable & low-cost.";
+        addMsg("assistant", FLOW.welcome + "\n\n" + Object.entries(FLOW.menu).map(([k,v])=>`${k}. ${v.label}`).join("\n"));
+        FLOW.chips.forEach(c=>mkChip(c));
+      }
+      if(mode === "gpt"){
+        modeTitle.textContent = "🤖 GPT Assistant";
+        modeHint.textContent = "Natural conversations powered by the server LLM.";
+        meta.textContent = "Mode: GPT • Server: /api/chat • Model: gpt-4o-mini";
+        desc.innerHTML = "A concise, Hinglish-fluent assistant. Shows <b>free text</b> conversations, pricing guidance, and general queries. Calls your backend <code>/api/chat</code>.";
+        addMsg("assistant", "Namaste! Main ApnaBot GPT Assistant hoon. Kuch bhi puchhiye — pricing, features, integrations…");
+        chips.innerHTML = ""; ["Pricing?","What channels?","Show onboarding steps"].forEach(c=>mkChip(c));
+      }
+      if(mode === "lead"){
+        modeTitle.textContent = "📇 Lead + FAQ";
+        modeHint.textContent = "Captures lead details, answers common questions, falls back to GPT if needed.";
+        meta.textContent = "Mode: Lead/FAQ • Hybrid (local + GPT fallback)";
+        desc.innerHTML = "Collect <b>lead info</b> (name/phone/business), answer <b>common FAQs instantly</b>, and fallback to GPT for unknowns. Great for websites needing conversion.";
+        leadDraft = { name: "", phone: "", business: "" };
+        addMsg("assistant", "Thanks for your interest in ApnaBot! May I know your name?");
+        chips.innerHTML = ""; ["My name is…","What are your prices?","Which languages?"] .forEach(c=>mkChip(c));
+      }
+    }
+
+    function mkChip(label){
+      const c = document.createElement("button"); c.className = "chip"; c.textContent = label; c.onclick=()=>{ input.value = label; sendBtn.click(); }; chips.appendChild(c);
+    }
+
+    async function handleSend(){
+      const txt = input.value.trim(); if(!txt) return; input.value = ""; addMsg("user", txt);
+      if(mode === "flow"){ handleFlow(txt); return; }
+      if(mode === "gpt"){ await callGPT(txt); return; }
+      if(mode === "lead"){ await handleLead(txt); return; }
+    }
+
+    function handleFlow(txt){
+      const key = txt.replace(/[^0-9]/g,"");
+      if(FLOW.menu[key]){ addMsg("assistant", FLOW.menu[key].reply); if(key==="4") kpiSaves += 0.2; updateKPIs(); return; }
+      if(/name|book|trial|demo/i.test(txt)){ addMsg("assistant","Great! Please reply with your name and phone to confirm your trial class."); kpiLeads += 1; updateKPIs(); return; }
+      addMsg("assistant","Please choose 1, 2, 3 or 4 from the menu above.");
+    }
+
+    async function callGPT(txt){
+      try{
+        const res = await fetch(API_URL,{ method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ session_id: sessionId, message: txt, history: [ { role:"system", content: SYSTEM_PROMPT } ] }) });
+        if(!res.ok) throw new Error("Upstream error");
+        const data = await res.json();
+        addMsg("assistant", data.reply || "(no reply)");
+        kpiSaves += 0.1; updateKPIs();
+      }catch(e){ addMsg("assistant","⚠️ Server error. Please try again."); console.error(e); }
+    }
+
+    async function handleLead(txt){
+      // Fill lead fields heuristically
+      if(!leadDraft.name && /name|i am|i'm|this is/i.test(txt)){
+        leadDraft.name = txt.replace(/.*?(name is|i am|i'm|this is)/i,"").trim();
+        addMsg("assistant","Hi "+(leadDraft.name||"there")+"! Could you share your phone number?"); return;
+      }
+      if(!leadDraft.phone && /(\+?\d[\d\s-]{8,})/.test(txt)){
+        leadDraft.phone = (txt.match(/(\+?\d[\d\s-]{8,})/)[0]||"").trim();
+        addMsg("assistant","Thanks! What business do you run?"); return;
+      }
+      if(!leadDraft.business && /(shop|real estate|coaching|gym|salon|restaurant|school|clinic|hotel|agency|factory|service|business)/i.test(txt)){
+        leadDraft.business = txt; kpiLeads += 1; updateKPIs();
+        addMsg("assistant","Noted. Quick FAQ: ask about pricing, channels or languages. For anything else, just ask!"); return;
+      }
+      // Local FAQ
+      const key = Object.keys(LEAD_FAQ.faqs).find(k=> new RegExp(k,"i").test(txt));
+      if(key){ addMsg("assistant", LEAD_FAQ.faqs[key]); kpiSaves += 0.2; updateKPIs(); return; }
+      // Fallback to GPT
+      await callGPT(txt);
+    }
+
+    // Events
+    sendBtn.addEventListener("click", handleSend);
+    input.addEventListener("keydown", e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); handleSend(); }});
+    tabs.forEach(t=> t.addEventListener("click", ()=> setMode(t.dataset.t)));
+
+    // Boot
+    setMode("flow");
+  </script>
+</body>
+</html>
