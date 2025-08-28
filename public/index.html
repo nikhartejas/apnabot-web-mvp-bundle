@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ApnaBot — Apna Business ka Digital Saathi</title>
+  <meta name="description" content="ApnaBot automates WhatsApp replies, orders, reminders, and reviews for Indian small businesses. Hindi • Hinglish • English. WhatsApp‑first." />
+  <meta name="theme-color" content="#10b981" />
+  <link rel="canonical" href="https://apnabot.in/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --brand:#10b981;
+      --brand-600:#059669;
+      --brand-100:#d1fae5;
+      --card:#ffffff;
+      --ring:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#f8fafc;line-height:1.5}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{color:var(--brand-600)}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--brand);color:#fff;padding:.9rem 1.25rem;border-radius:14px;font-weight:600;box-shadow:0 8px 20px rgba(16,185,129,.25)}
+    .btn:hover{background:var(--brand-600)}
+    .btn-outline{background:#fff;border:1px solid var(--ring);color:var(--ink)}
+    .btn-outline:hover{background:#f9fafb}
+    header{position:sticky;top:0;background:#ffffffd9;backdrop-filter:blur(8px);border-bottom:1px solid var(--ring);z-index:50}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    nav .brand{display:flex;align-items:center;gap:.6rem;font-weight:800}
+    .logo{width:30px;height:30px}
+    .nav-links{display:none;gap:1.25rem;font-weight:600}
+    @media (min-width: 820px){.nav-links{display:flex}}
+    .hero{position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:-10%;background:radial-gradient(1200px 600px at 70% -20%, #a7f3d0cc, transparent 60%),linear-gradient(180deg,#fff, #f0fdf4);z-index:-1}
+    .hero .inner{display:grid;grid-template-columns:1.1fr;gap:2rem;padding:72px 0}
+    @media (min-width: 980px){.hero .inner{grid-template-columns:1.1fr .9fr;align-items:center;padding:96px 0}}
+    .kicker{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--ring);padding:.25rem .6rem;border-radius:999px;font-size:.8rem;color:#0f766e}
+    h1{font-size:clamp(1.9rem, 2.6vw + 1rem, 3.2rem);line-height:1.1;margin:.5rem 0}
+    .lead{color:var(--muted);font-size:1.05rem;max-width:56ch}
+    .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+    .phone{background:#fff;border:1px solid var(--ring);border-radius:28px;box-shadow:0 10px 40px rgba(2,6,23,.08);padding:16px;max-width:360px;margin:0 auto}
+    .chat{background:#f1f5f9;border:1px solid var(--ring);border-radius:18px;height:520px;padding:12px;display:flex;flex-direction:column;gap:10px}
+    .bot{align-self:flex-start;max-width:78%;background:var(--brand-100);color:#064e3b;padding:10px 12px;border-radius:14px 14px 14px 6px;box-shadow:0 2px 6px rgba(16,185,129,.15)}
+    .user{align-self:flex-end;max-width:78%;background:#fff;border:1px solid var(--ring);padding:10px 12px;border-radius:14px 14px 6px 14px;box-shadow:0 2px 6px rgba(2,6,23,.06)}
+    section{padding:64px 0}
+    h2{font-size:1.9rem;margin:0 0 .4rem}
+    .sub{color:var(--muted);max-width:60ch}
+    .grid{display:grid;gap:18px}
+    .cards-4{grid-template-columns:repeat(1, minmax(0,1fr))}
+    @media (min-width: 760px){.cards-4{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width: 1024px){.cards-4{grid-template-columns:repeat(4,1fr)}}
+    .card{background:#fff;border:1px solid var(--ring);border-radius:16px;padding:18px;box-shadow:0 6px 16px rgba(2,6,23,.04)}
+    .pricing{grid-template-columns:repeat(1, minmax(0,1fr))}
+    @media (min-width: 980px){.pricing{grid-template-columns:repeat(3,1fr)}}
+    .price{display:flex;align-items:baseline;justify-content:space-between}
+    .price .amt{font-weight:800;color:#065f46;font-size:1.6rem}
+    .check{color:#10b981;margin-right:.5rem}
+    footer{background:#ffffff;border-top:1px solid var(--ring)}
+    .foot{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:space-between;padding:28px 0}
+    @media (min-width: 820px){.foot{flex-direction:row}}
+    .muted{color:var(--muted)}
+    .chip{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:#ecfeff;color:#0e7490;font-weight:600;font-size:.8rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <svg class="logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <rect x="4" y="6" width="40" height="30" rx="10" fill="#A7F3D0" />
+            <path d="M6 36l6-4h24c5 0 8-3 8-8V12" stroke="#0F172A" stroke-width="2" fill="none" />
+            <circle cx="20" cy="20" r="2.2" fill="#0F172A" />
+            <circle cx="30" cy="20" r="2.2" fill="#0F172A" />
+            <path d="M20 26c2.5 2.5 5.5 2.5 8 0" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>ApnaBot</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faqs">FAQs</a>
+          <a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20a%20demo">WhatsApp Demo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="inner">
+        <div>
+          <span class="kicker">WhatsApp‑first • Hindi • Hinglish • English</span>
+          <h1>Apna Business ka <span style="color:var(--brand)">Digital Saathi</span></h1>
+          <p class="lead">ApnaBot automates customer replies, order taking, reminders, and review responses — so your café, salon, kirana, or tuition center stays <b>always open</b> without extra staff.</p>
+          <div class="actions">
+            <a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20a%20demo">Chat on WhatsApp</a>
+            <a class="btn btn-outline" href="mailto:hello@apnabot.in">Email Us</a>
+          </div>
+          <p class="muted" style="margin-top:.5rem;font-size:.85rem">No spam. Human handover anytime.</p>
+        </div>
+        <div>
+          <div class="phone">
+            <div class="chat">
+              <div class="bot">Namaste! 👋 Yeh <b>ApnaBot</b> hai — Apna Business ka Digital Saathi. Kaise madad karu?</div>
+              <div class="bot">1) Order/Booking • 2) Timings • 3) Location • 4) Offers</div>
+              <div class="user">1</div>
+              <div class="bot">Great! Kis date/time ke liye? WhatsApp pe confirm kar deta hu. ✅</div>
+              <div class="user">Kal 6PM, 2 log</div>
+              <div class="bot">Done. Reminder aayega T‑2h aur T‑30m. Aapka din shubh ho! ✨</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <h2>What ApnaBot automates</h2>
+      <p class="sub">Start with quick wins, then stack automations as you grow.</p>
+      <div class="grid cards-4" style="margin-top:18px">
+        <div class="card"><strong>Auto Replies</strong><br><span class="muted">Reply to every WhatsApp message in &lt;60s, even after hours.</span></div>
+        <div class="card"><strong>Reminders</strong><br><span class="muted">No‑show, pick‑up, payment & re‑order reminders on autopilot.</span></div>
+        <div class="card"><strong>Reviews & Offers</strong><br><span class="muted">Instant replies to Google/Zomato reviews + festival offers.</span></div>
+        <div class="card"><strong>Orders & Billing</strong><br><span class="muted">Take orders and send UPI links. Link Vyapar/myBillBook.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <h2>Simple pricing (INR)</h2>
+      <p class="sub">Start small. Upgrade when you see results.</p>
+      <div class="grid pricing" style="margin-top:18px">
+        <div class="card">
+          <div class="price"><strong>Starter</strong><span class="amt">₹999<span class="muted" style="font-weight:500">/mo</span></span></div>
+          <ul>
+            <li><span class="check">✔</span> WhatsApp greeting & FAQs</li>
+            <li><span class="check">✔</span> Auto review replies</li>
+            <li><span class="check">✔</span> Owner handover button</li>
+            <li><span class="check">✔</span> Basic analytics</li>
+          </ul>
+          <p><a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20I%20want%20Starter">Start Trial</a></p>
+        </div>
+        <div class="card" style="border:2px solid var(--brand);box-shadow:0 10px 28px rgba(16,185,129,.15)">
+          <div class="price"><strong>Growth</strong><span class="amt">₹1,999<span class="muted" style="font-weight:500">/mo</span></span></div>
+          <div class="chip">Popular</div>
+          <ul>
+            <li><span class="check">✔</span> All Starter</li>
+            <li><span class="check">✔</span> No‑show & payment reminders</li>
+            <li><span class="check">✔</span> Simple offers & broadcasts</li>
+            <li><span class="check">✔</span> Monthly report</li>
+          </ul>
+          <p><a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20Choose%20Growth">Choose Growth</a></p>
+        </div>
+        <div class="card">
+          <div class="price"><strong>Pro</strong><span class="amt">₹4,999<span class="muted" style="font-weight:500">/mo</span></span></div>
+          <ul>
+            <li><span class="check">✔</span> All Growth</li>
+            <li><span class="check">✔</span> Vyapar/myBillBook link</li>
+            <li><span class="check">✔</span> Inventory low‑stock alerts</li>
+            <li><span class="check">✔</span> Custom workflows</li>
+          </ul>
+          <p><a class="btn" href="https://wa.me/919820432898?text=Hi%20ApnaBot%20Team%2C%20Talk%20about%20Pro">Talk to Sales</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faqs">
+    <div class="container">
+      <h2>FAQs</h2>
+      <details class="card"><summary><strong>Do I need new hardware or apps?</strong></summary><div class="muted">No. ApnaBot runs on your existing WhatsApp Business and browser. Optional links to Vyapar/myBillBook.</div></details>
+      <details class="card"><summary><strong>Which languages are supported?</strong></summary><div class="muted">English, Hindi, and Hinglish by default. We can adapt to Marathi/Bengali/Tamil for key flows.</div></details>
+      <details class="card"><summary><strong>Can humans take over the chat?</strong></summary><div class="muted">Always. Your staff/owner can jump in anytime. ApnaBot is designed for human‑in‑the‑loop control.</div></details>
+      <details class="card"><summary><strong>What’s the typical setup time?</strong></summary><div class="muted">One day for the quick win (auto replies + reviews). Advanced flows roll out over 2–4 weeks.</div></details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <svg class="logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <rect x="4" y="6" width="40" height="30" rx="10" fill="#A7F3D0" />
+          <path d="M6 36l6-4h24c5 0 8-3 8-8V12" stroke="#0F172A" stroke-width="2" fill="none" />
+          <circle cx="20" cy="20" r="2.2" fill="#0F172A" />
+          <circle cx="30" cy="20" r="2.2" fill="#0F172A" />
+          <path d="M20 26c2.5 2.5 5.5 2.5 8 0" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <strong>ApnaBot</strong>
+      </div>
+      <div class="muted">Made for Indian SMBs • WhatsApp‑first • Hindi • English</div>
+      <div class="muted">© <span id="year"></span> ApnaBot • <a href="#">Privacy</a> • <a href="#">Terms</a> • <a href="https://wa.me/919820432898">WhatsApp</a></div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
